@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom'; // <--- 1. IMPORTANTE: Importamos Link
+import { Link } from 'react-router-dom'; 
+
 // Importa tus imágenes
 import imgBranding from '../assets/servicio-branding.jpg';
 import imgDigital from '../assets/servicio-digital.jpg';
@@ -12,25 +13,25 @@ const services = [
     id: 1, 
     title: "Branding", 
     img: imgBranding,
-    link: "/branding" // Placeholder
+    link: "/branding" // Ahora SÍ funcionará
   },
   { 
     id: 2, 
     title: "Diseño Digital", 
     img: imgDigital,
-    link: "/digital" // Placeholder
+    link: "/digital" 
   },
   { 
     id: 3, 
     title: "Fotografía", 
     img: imgFoto,
-    link: "/fotografia" // <--- 2. ESTA ES LA RUTA IMPORTANTE
+    link: "/fotografia" 
   },
   { 
     id: 4, 
     title: "Diseño Web", 
     img: imgWeb,
-    link: "/web" // Placeholder
+    link: "/web" 
   }
 ];
 
@@ -65,17 +66,13 @@ const Services = () => {
         
         {services.map((service, index) => (
           
-          /* 3. LÓGICA DE NAVEGACIÓN */
-          /* Si es el ID 3 (Foto), usa Link. Si no, usa div normal. */
-          service.id === 3 ? (
-            <Link key={service.id} to="/fotografia" className="block w-full">
-               <ServiceCard service={service} index={index} />
-            </Link>
-          ) : (
-            <div key={service.id} className="block w-full">
-               <ServiceCard service={service} index={index} />
-            </div>
-          )
+          /* --- CORRECCIÓN --- */
+          /* Quitamos el 'if' (service.id === 3). */
+          /* Ahora TODOS son Links y usan su propiedad 'service.link' */
+          
+          <Link key={service.id} to={service.link} className="block w-full">
+             <ServiceCard service={service} index={index} />
+          </Link>
 
         ))}
       </div>
@@ -83,8 +80,7 @@ const Services = () => {
   );
 };
 
-/* 4. COMPONENTE DE TARJETA (OPTIMIZADO PARA CELULAR Y PC) */
-/* Incluye la mejora para que en celular el texto se vea siempre */
+/* COMPONENTE DE TARJETA (Sin cambios) */
 const ServiceCard = ({ service, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -100,10 +96,8 @@ const ServiceCard = ({ service, index }) => (
         className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 filter grayscale-0"
       />
       
-      {/* Overlay: Visible un poco en celular, invisible en PC hasta hover */}
       <div className="absolute inset-0 bg-black/60 md:bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300" />
       
-      {/* Texto: Visible en celular, invisible en PC hasta hover */}
       <div className="absolute inset-0 flex flex-col justify-center items-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0">
         <h3 className="font-anton text-4xl md:text-6xl text-[#F5F5F0] uppercase tracking-wide px-2 text-center">
           {service.title}

@@ -10,11 +10,11 @@ import img1 from '../assets/proyecto-guitarra.jpg';
 import img2 from '../assets/proyecto-cereza.jpg';
 import img3 from '../assets/servicio-branding.jpg';
 import img4 from '../assets/servicio-digital.jpg';
-import collageBg from '../assets/collage-bg.png'; // Usaremos un nuevo collage de ejemplo
+import collageBg from '../assets/collage-dd.png'; // Usaremos un nuevo collage de ejemplo
 
 // --- DATA ESPECÍFICA DE DISEÑO WEB ---
-const WD_COLOR = '#B00601'; // Verde/Cyan
-const WD_TITLE = 'FOTOGRAFIA';
+const WD_COLOR = '#00FFC0'; // Verde/Cyan
+const WD_TITLE = 'DISEÑO';
 const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
 
 // Lista de imágenes para el Grid (igual que en Branding por ahora)
@@ -27,7 +27,7 @@ const rawImages = [
 ];
 
 
-const Photography = () => {
+const DigitalDesign = () => {
   
   // --- SCROLL TO TOP ---
   useEffect(() => {
@@ -62,4 +62,4 @@ const Photography = () => {
     </div>
   );
 };
-export default Photography;
+export default DigitalDesign;

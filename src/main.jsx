@@ -6,6 +6,9 @@ import './index.css';
 // Importamos tus páginas
 import App from './App';
 import Photography from './pages/Photography';
+import Branding from './pages/Branding';
+import Digital from './pages/DigitalDesign';
+import WebDesign from './pages/WebDesign';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,7 +20,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         
         {/* Ruta de Fotografía */}
         <Route path="/fotografia" element={<Photography />} />
+        <Route path="/branding" element={<Branding />} />
+        <Route path="/digital" element={<Digital />} />
+        <Route path="/web" element={<WebDesign />} /> 
       </Routes>
+      
     </BrowserRouter>
   </React.StrictMode>,
 );
