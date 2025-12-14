@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-oren-green: #1C3322;
+  --color-oren-black: #0F0E0E;
+  --font-anton: 'Anton', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --color-oren-white: #F5F5F0;
+}
+
+html {
+  background-color: #1C3322; /* Evita rebotes blancos en Mac/iPhone */
+  height: 100%;
+}
+
+body {
+  /* --- CAPA 1 (FONDO BASE): NEGRO --- */
+  background-color: #0F0E0E;
+
+  /* --- CAPA 2 (SUPERIOR): EL VERDE QUE SE DESVANECE --- */
+  background-image: linear-gradient(
+    180deg, 
+    #1C3322 0%,        /* Arriba: Verde Puro */
+    #1C3322 60%,       /* Hero: Se mantiene verde sólido la mayor parte */
+    rgba(28, 51, 34, 0) 100% /* Final: Se vuelve transparente (revelando el negro de abajo) */
+  );
+
+  /* Configuración del parche verde */
+  background-repeat: no-repeat;
+  background-size: 100% 150vh; /* El verde cubre el 150% de la altura de la pantalla inicial */
+  background-attachment: scroll; /* Se mueve natural al bajar */
+
+  /* Configuración General */
+  min-height: 100vh;
+  margin: 0;
+  color: #F5F5F0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Textura de Ruido (Siempre encima de todo) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background-image: url('/src/assets/noise.png'); /* Verifica que la ruta esté bien */
+  background-repeat: repeat;
+  background-size: 150px;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+}
