@@ -1,40 +1,35 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import logoSmall from '../assets/logo-header.png';
 import { Link } from 'react-router-dom';
+import logoHeader from '../assets/logo-header.png'; 
 
 const Navbar = () => {
   return (
-    <motion.nav 
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      // items-center es vital para centrar el texto con el logo alto
-      className="fixed top-0 left-0 w-full flex justify-between items-center px-8 z-50 uppercase font-anton"
-    >
-      {/* IZQUIERDA: Logo (122x122) */}
-      <Link to="/" className="w-[122px] h-[122px] flex items-center justify-start cursor-pointer">
+    <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-[62px] py-6">
+      
+      {/* 1. IZQUIERDA: LOGO */}
+      <Link to="/" className="w-[80px] md:w-[122px] h-[80px] md:h-[122px] flex items-center justify-start cursor-pointer z-50">
         <img 
-          src={logoSmall} 
+          src={logoHeader} 
           alt="O'REN" 
           className="w-full h-full object-contain" 
         />
       </Link>
 
-      {/* CENTRO: Menú */}
-      {/* CORRECCIÓN: Sin 'font-bold' y sin tracking extra para el look "condensed" original */}
-      <ul className="flex gap-12 text-[18px] text-[#F3F3F3]">
-        <li className="cursor-pointer hover:text-gray-300 transition-colors">Proyectos</li>
-        <li className="cursor-pointer hover:text-gray-300 transition-colors">Sobre Nosotros</li>
-        <li className="cursor-pointer hover:text-gray-300 transition-colors">Contáctanos</li>
-      </ul>
+      {/* 2. CENTRO: MENÚ (Solo en PC) */}
+      {/* - Quité 'text-sm' para que tenga su tamaño normal. */}
+      {/* - Quité el 'hover:text-red' para que no cambie de color. */}
+      <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 font-anton uppercase tracking-wider text-[#F5F5F0]">
+        <a href="/#proyectos" className="transition-opacity hover:opacity-70">Proyectos</a>
+        <a href="/#nosotros" className="transition-opacity hover:opacity-70">Sobre Nosotros</a>
+        <a href="/#contacto" className="transition-opacity hover:opacity-70">Contáctanos</a>
+      </div>
 
-      {/* DERECHA: Año */}
-      {/* Mismas propiedades que el menú */}
-      <div className="w-[122px] text-right text-[18px] flex items-center justify-end h-[122px] text-[#F3F3F3]">
+      {/* 3. DERECHA: COPYRIGHT ©2025 */}
+      <div className="font-anton text-[#F5F5F0] uppercase hidden md:block">
         ©2025
       </div>
-    </motion.nav>
+
+    </nav>
   );
 };
 
