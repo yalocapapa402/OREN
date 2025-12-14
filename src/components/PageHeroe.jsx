@@ -1,30 +1,121 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// ============================================
+// 🎨 CONFIGURACIÓN DE ESTILOS
+// ============================================
+// Aquí puedes modificar TODOS los aspectos visuales fácilmente
+
+const STYLES = {
+  // Contenedor principal
+  container: {
+    padding: {
+      vertical: 'pt-20 pb-20',
+      horizontal: 'px-0 md:px-6'
+    }
+  },
+
+  // Collage de fondo
+  collage: {
+    // Tamaño del collage
+    width: 'w-[70vw] sm:w-[75vw] md:w-[647.28px]',
+    aspectRatio: 'aspect-[647/469]',
+    
+    // Posición vertical
+    position: {
+      mobile: 'top-20',
+      desktop: 'md:top-[150px]'
+    },
+    
+    // Animación
+    animation: {
+      duration: 0.8,
+      initial: { opacity: 0, scale: 0.9 },
+      animate: { opacity: 1, scale: 1 }
+    }
+  },
+
+  // Título principal
+  title: {
+    // Tamaño de fuente (min, preferido, max)
+    fontSize: {
+      min: '3rem',
+      preferred: '15vw',
+      max: '180px'
+    },
+    
+    // Posición vertical
+    position: {
+      mobile: 'top-[340px]',
+      desktop: 'md:top-[504px]'
+    },
+    
+    // Espaciado de letras
+    letterSpacing: '0.08em',
+    
+    // Sombra
+    shadow: '0px 4px 12px rgba(0,0,0,0.6)',
+    
+    // Animación
+    animation: {
+      duration: 0.8,
+      delay: 0.2,
+      initial: { y: 30, opacity: 0 },
+      animate: { y: 0, opacity: 1 }
+    }
+  },
+
+  // Descripción
+  description: {
+    // Ancho
+    width: 'w-[90vw] sm:w-[85vw] md:w-auto',
+    
+    // Padding horizontal
+    padding: 'px-4',
+    
+    // Posición vertical
+    position: {
+      mobile: 'top-[400px]',
+      desktop: 'md:top-auto md:bottom-[370px]'
+    },
+    
+    // Opacidad del texto
+    opacity: 'opacity-90',
+    
+    // Animación
+    animation: {
+      duration: 0.8,
+      delay: 0.4,
+      initial: { opacity: 0, y: 30 },
+      animate: { opacity: 1, y: 0 }
+    }
+  }
+};
+
+// ============================================
+// 📦 COMPONENTE PRINCIPAL
+// ============================================
+
 const PageHeroe = ({ title, description, collageBg, color }) => {
-
   return (
-    // Contenedor principal
-    <div className="relative w-full min-h-screen flex flex-col items-center justify-start pt-20 pb-20 px-0 md:px-6">
-
+    <div className={`relative w-full min-h-screen flex flex-col items-center justify-start ${STYLES.container.padding.vertical} ${STYLES.container.padding.horizontal}`}>
       
-      {/* 1. Contenedor del Collage - Responsive y Centrado */}
+      {/* Collage de fondo */}
       <div
-        className="
+        className={`
           absolute z-0
-          w-[70vw] sm:w-[75vw] md:w-[647.28px] 
-          aspect-[647/469]
+          ${STYLES.collage.width}
+          ${STYLES.collage.aspectRatio}
           left-1/2 -translate-x-1/2
-          top-20 md:top-[150px]
+          ${STYLES.collage.position.mobile} ${STYLES.collage.position.desktop}
           pointer-events-none
-        "
+        `}
       >
-        
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }} 
+          initial={STYLES.collage.animation.initial}
+          whileInView={STYLES.collage.animation.animate}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: STYLES.collage.animation.duration }}
           className="absolute inset-0 flex items-center justify-center"
         >
           <img 
@@ -41,56 +132,51 @@ const PageHeroe = ({ title, description, collageBg, color }) => {
         </motion.div>
       </div>
 
-      {/* 2. Título Principal - Centrado Absoluto y Responsive (Tamaño/Posición Y) */}
+      {/* Título principal */}
       <motion.h1 
-        initial={{ y: 30, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
+        initial={STYLES.title.animation.initial}
+        whileInView={STYLES.title.animation.animate}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-       className="
-  font-anton uppercase absolute z-20
-  text-center leading-none
-  w-screen
-  left-1/2 -translate-x-1/2
-  top-[340px] md:top-[504px]
-"
-
+        transition={{ 
+          duration: STYLES.title.animation.duration, 
+          delay: STYLES.title.animation.delay 
+        }}
+        className={`
+          font-anton uppercase absolute z-20
+          text-center leading-none w-screen
+          left-1/2 -translate-x-1/2
+          ${STYLES.title.position.mobile} ${STYLES.title.position.desktop}
+        `}
         style={{
           color: color,
-          fontSize: 'clamp(3rem, 15vw, 180px)', // Tamaño de fuente dinámico
-          letterSpacing: '0.08em',
-          filter: 'drop-shadow(0px 4px 12px rgba(0,0,0,0.6))',
+          fontSize: `clamp(${STYLES.title.fontSize.min}, ${STYLES.title.fontSize.preferred}, ${STYLES.title.fontSize.max})`,
+          letterSpacing: STYLES.title.letterSpacing,
+          filter: `drop-shadow(${STYLES.title.shadow})`,
         }}
       >
         {title}
       </motion.h1>
 
-      {/* 3. Bloque de Texto y Botón - Centrado y Responsive (Posición Y) */}
+      {/* Descripción */}
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={STYLES.description.animation.initial}
+        whileInView={STYLES.description.animation.animate}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      className="
-  absolute z-30 text-center flex flex-col items-center
-  w-[90vw] sm:w-[85vw] md:w-auto
-  px-4
-  top-[420px] md:top-auto
-  md:bottom-[280px]
-  left-1/2 -translate-x-1/2
-"
-
+        transition={{ 
+          duration: STYLES.description.animation.duration, 
+          delay: STYLES.description.animation.delay 
+        }}
+        className={`
+          absolute z-30 text-center flex flex-col items-center
+          ${STYLES.description.width}
+          ${STYLES.description.padding}
+          ${STYLES.description.position.mobile} ${STYLES.description.position.desktop}
+          left-1/2 -translate-x-1/2
+        `}
       >
-        <p className="font-inter text-[#E6E1D1] max-w-xl mx-auto text-sm md:text-lg mb-8 opacity-90 leading-relaxed drop-shadow-md">
+        <p className={`font-inter leading-relaxed drop-shadow-md ${STYLES.description.opacity}`}>
           {description}
         </p>
-        
-        <button 
-          className="bg-transparent font-inter font-bold text-xs px-10 py-4 uppercase tracking-widest transition-all duration-300 rounded-[18px]"
-          style={{ borderColor: color, color: color }}
-        >
-          Ver Más
-        </button>
       </motion.div>
     </div>
   );
