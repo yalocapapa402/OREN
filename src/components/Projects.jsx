@@ -51,10 +51,10 @@ const Projects = () => {
                 </div>
                 <div className="pt-2">
                     <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 tracking-wide leading-none">
-                        Urban Culture
+                        Expogan
                     </h3>
                     <p className="font-inter text-[14px] text-[#E6E1D1] max-w-xs leading-tight opacity-80">
-                        Rompemos moldes para crear identidades con carácter. Diseño web y fotografía.
+                        Expogan Sonora, la feria ganadera más grande del noroeste del país.
                     </p>
                 </div>
             </motion.div>
@@ -79,7 +79,7 @@ const Projects = () => {
                 </div>
                 <div className="pt-2">
                     <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 tracking-wide leading-none">
-                        Pop Corn The System
+                        GATA ROMPE HOGARES
                     </h3>
                     <p className="font-inter text-[14px] text-[#E6E1D1] max-w-md leading-tight opacity-80">
                         Transformamos conceptos abstractos en experiencias visuales que tu audiencia no podrá ignorar.
@@ -112,11 +112,10 @@ const Projects = () => {
                 </div>
                 <div className="pt-2">
                     <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 tracking-wide leading-none">
-                        Proyectos Recientes
+                        NORO
                     </h3>
                     <p className="font-inter text-[14px] text-[#E6E1D1] max-w-md leading-tight opacity-80">
-                        Rompemos moldes para crear identidades con carácter.
-                    </p>
+En conmemoración por el Día Internacional de la Mujer, Hermosillo tendrá una juntada exclusiva de mujeres que practican skate el próximo sábado 1 de marzo en las inmediaciones del Parque Madero                    </p>
                 </div>
             </motion.div>
         </div>
@@ -141,10 +140,10 @@ const Projects = () => {
                 </div>
                 <div className="pt-2">
                     <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 tracking-wide leading-none">
-                        Deliciously Unique
+                        Bloomly.
                     </h3>
                     <p className="font-inter text-[14px] text-[#E6E1D1] max-w-xs leading-tight opacity-80">
-                        Meet the crew. French Popcorn.
+                        Diseños florales personalizados para tu dia especial.
                     </p>
                 </div>
             </motion.div>
