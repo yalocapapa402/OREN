@@ -11,15 +11,15 @@ import imgWeb from '../assets/servicio-web.jpg';
 const services = [
   { 
     id: 1, 
-    title: "Branding", 
+    title: "Produccion Multimedia", 
     img: imgBranding,
-    link: "/branding" // Ahora SÍ funcionará
+    link: "/Produccion multimedia" // Ahora SÍ funcionará
   },
   { 
     id: 2, 
-    title: "Diseño Digital", 
+    title: "Diseño Grafico", 
     img: imgDigital,
-    link: "/digital" 
+    link: "/Diseño Grafico" 
   },
   { 
     id: 3, 
