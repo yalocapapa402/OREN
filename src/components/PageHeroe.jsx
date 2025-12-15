@@ -6,13 +6,14 @@ const STYLES = {
   // Estilos de la descripción 
   description: {
     base: "text-white text-center font-light uppercase tracking-wider",
-    // Ancho adaptable
+    // Ancho adaptable (móvil: w-full, escritorio: ancho fijo)
     width: "w-full max-w-[700px] px-8 md:w-[600px] lg:w-[700px] md:px-0", 
     
-    // === PUNTO CLAVE PARA AJUSTAR LA ALTURA ===
-    // top-[55vh] en móviles: Reduce este número (e.g., 50vh) para SUBIR el texto, o auméntalo (e.g., 60vh) para BAJAR el texto.
-    // md:top-[63vh] en escritorio: Este es el valor para pantallas grandes.
-    position: "absolute top-[55vh] md:top-[63vh] z-30" 
+    // === AJUSTE PARA SUBIR EL TEXTO EN MÓVILES ===
+    // top-[45%] lo sube 10% más que antes. 
+    // 💡 PARA SUBIR AÚN MÁS: Reduce el 45% (ej: 40%).
+    // 💡 PARA BAJAR UN POCO: Aumenta el 45% (ej: 50%).
+    position: "absolute top-[45%] md:top-[63vh] z-30" 
   },
   // Estilos del botón (se mantienen, pero ya no se usan)
   button: {
@@ -60,7 +61,7 @@ const PageHeroe = ({ title, description, collageBg, color }) => {
         transition={{ duration: 0.5, delay: 0.3 }}
         
         className={`
-            ${STYLES.description.position} // <- Controla la altura.
+            ${STYLES.description.position} // <- ¡Aquí está tu ajuste de altura!
             left-1/2 -translate-x-1/2 
             ${STYLES.description.width} 
             p-4 md:p-0 
@@ -70,21 +71,9 @@ const PageHeroe = ({ title, description, collageBg, color }) => {
         <p className="text-white text-center font-light uppercase tracking-wider text-sm md:text-base">
           {description}
         </p>
-
-        {/* ELIMINACIÓN DEL BOTÓN "Ver Proyectos"
-        <a href="#galeria">
-            <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={STYLES.button.base}
-                style={{ borderColor: color, color: color }}
-            >
-                Ver Proyectos
-            </motion.button>
-        </a>
-        */}
+        
+        {/* El botón "Ver Proyectos" ha sido eliminado, como solicitaste. */}
       </motion.div>
-      
     </div>
   );
 };
