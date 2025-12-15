@@ -1,27 +1,29 @@
+
 import React, { useEffect } from 'react'; 
 import Navbar from '../components/Navbar';
-import MasonryGrid from '../components/MasonryGrid'; // Componente de Galería
-import PageHeroe from '../components/PageHeroe'; // Nuevo Componente Héroe
+import MasonryGrid from '../components/MasonryGrid'; 
+import PageHeroe from '../components/PageHeroe'; 
 
-// --- IMÁGENES (Solo importamos lo que usaremos aquí) ---
+// --- IMÁGENES DE EJEMPLO (Se pueden reemplazar con imágenes reales de Diseño Web) ---
+// Usaremos las mismas imágenes temporales, pero tú las reemplazarías después.
 import img1 from '../assets/proyecto-guitarra.jpg'; 
 import img2 from '../assets/proyecto-cereza.jpg';
 import img3 from '../assets/servicio-branding.jpg';
 import img4 from '../assets/servicio-digital.jpg';
-import collageBg from '../assets/collage-bd.png'; 
+import collageBg from '../assets/collage-branding-title.png'; // Usaremos un nuevo collage de ejemplo
 
-// --- DATA ESPECÍFICA DE BRANDING ---
-const BRANDING_COLOR = '#FF4D00'; // Naranja
-const BRANDING_TITLE = 'BRANDING';
-const BRANDING_DESCRIPTION = 'Rompemos moldes para crear identidades con carácter. Transformamos conceptos abstractos en experiencias visuales.';
+// --- DATA ESPECÍFICA DE DISEÑO WEB ---
+const WD_COLOR = '#00FFC0'; // Verde/Cyan
+const WD_TITLE = 'DISEÑO';
+const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
 
-// Lista de imágenes para el Grid
+// Lista de imágenes para el Grid (igual que en Branding por ahora)
 const rawImages = [
-  img3, img1, img4, img2, img1, 
+  img4, img2, img1, img3, img4, 
+  img1, img3, img2, img4, img1, 
   img3, img2, img4, img1, img3, 
   img2, img4, img1, img3, img2, 
-  img4, img1, img3, img2, img1,
-  img3, img4, img2, img1
+  img1, img3, img4, img2
 ];
 
 
@@ -38,18 +40,18 @@ const Branding = () => {
 
       <div className="w-full flex flex-col">
         
-        {/* HERO SECTION - Ahora es una sola línea de código */}
+        {/* HERO SECTION - REUTILIZAMOS PAGEHEROE CON NUEVOS PROPS */}
         <PageHeroe 
-          title={BRANDING_TITLE}
-          description={BRANDING_DESCRIPTION}
+          title={WD_TITLE}
+          description={WD_DESCRIPTION}
           collageBg={collageBg}
-          color={BRANDING_COLOR}
+          color={WD_COLOR} // Usamos el color de Diseño Web
         />
 
-        {/* GRID CONTAINER */}
-        <div className="-mt-64 relative z-20"></div>
-        <MasonryGrid rawImages={rawImages} />
-        <div className="-mt-64 relative z-20"></div>
+        {/* GRID CONTAINER - MANTENEMOS EL MARGEN NEGATIVO PARA SUBIRLO */}
+        <div className="-mt-64 relative z-20"> 
+             <MasonryGrid rawImages={rawImages} />
+        </div>
         
       </div>
 
