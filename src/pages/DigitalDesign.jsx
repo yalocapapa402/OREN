@@ -1,21 +1,23 @@
+// src/pages/DigitalDesign.jsx
 
 import React, { useEffect } from 'react'; 
 import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid'; 
 import PageHeroe from '../components/PageHeroe'; 
 
-// --- IMÁGENES DE EJEMPLO (Se pueden reemplazar con imágenes reales de Diseño Web) ---
-// Usaremos las mismas imágenes temporales, pero tú las reemplazarías después.
+// --- IMÁGENES DE EJEMPLO DEL GRID (Se mantienen) ---
 import img1 from '../assets/proyecto-guitarra.jpg'; 
 import img2 from '../assets/proyecto-cereza.jpg';
 import img3 from '../assets/servicio-branding.jpg';
 import img4 from '../assets/servicio-digital.jpg';
-import collageBg from '../assets/collage-dd.png'; // Usaremos un nuevo collage de ejemplo
 
-// --- DATA ESPECÍFICA DE DISEÑO WEB ---
-const WD_COLOR = '#00FFC0'; // Verde/Cyan
-const WD_TITLE = 'DISEÑO';
-const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
+// 🛑 ELIMINAMOS LA IMPORTACIÓN DEL COLLAGE ANTERIOR (collageBg)
+// import collageBg from '../assets/collage-dd.png'; // No necesario
+
+// --- DATA ESPECÍFICA DE DISEÑO GRÁFICO (DigitalDesign) ---
+const DD_COLOR = '#00FFC0'; // Verde/Cyan
+const DD_TITLE = 'DISEÑO GRÁFICO'; // Cambiamos el título
+const DD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
 
 // Lista de imágenes para el Grid (igual que en Branding por ahora)
 const rawImages = [
@@ -40,12 +42,16 @@ const DigitalDesign = () => {
 
       <div className="w-full flex flex-col">
         
-        {/* HERO SECTION - REUTILIZAMOS PAGEHEROE CON NUEVOS PROPS */}
+        {/* HERO SECTION - AHORA CON LAS DOS RUTAS ABSOLUTAS */}
         <PageHeroe 
-          title={WD_TITLE}
-          description={WD_DESCRIPTION}
-          collageBg={collageBg}
-          color={WD_COLOR} // Usamos el color de Diseño Web
+          title={DD_TITLE} // Usamos el título corregido
+          description={DD_DESCRIPTION}
+          
+          // 🛑 RUTAS ABSOLUTAS DESDE LA CARPETA PUBLIC
+          collageBgDesktop="/images/collage-disenografico-desktop.png" // Usa el nombre exacto
+          collageBgMobile="/images/collage-disenografico-mobile.png"   // Usa el nombre exacto
+          
+          color={DD_COLOR} 
         />
 
         {/* GRID CONTAINER - MANTENEMOS EL MARGEN NEGATIVO PARA SUBIRLO */}

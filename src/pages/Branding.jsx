@@ -1,65 +1,67 @@
+// src/pages/Branding.jsx
 
 import React, { useEffect } from 'react'; 
 import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid'; 
 import PageHeroe from '../components/PageHeroe'; 
 
-// --- IMÁGENES DE EJEMPLO (Se pueden reemplazar con imágenes reales de Diseño Web) ---
-// Usaremos las mismas imágenes temporales, pero tú las reemplazarías después.
+// --- IMÁGENES DEL GRID (Se mantienen) ---
 import img1 from '../assets/proyecto-guitarra.jpg'; 
 import img2 from '../assets/proyecto-cereza.jpg';
 import img3 from '../assets/servicio-branding.jpg';
 import img4 from '../assets/servicio-digital.jpg';
-import collageBg from '../assets/collage-branding-title.png'; // Usaremos un nuevo collage de ejemplo
 
-// --- DATA ESPECÍFICA DE DISEÑO WEB ---
-const WD_COLOR = '#00FFC0'; // Verde/Cyan
-const WD_TITLE = 'DISEÑO';
-const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
+// --- DATA ESPECÍFICA DE BRANDING ---
+const BRANDING_COLOR = '#FFFFFF'; // Color de ejemplo
+const BRANDING_TITLE = 'BRANDING';
+const BRANDING_DESCRIPTION = 'Creamos la identidad visual y estratégica que tu marca necesita para destacar y conectar con su audiencia.';
 
-// Lista de imágenes para el Grid (igual que en Branding por ahora)
+// Lista de imágenes para el Grid 
 const rawImages = [
-  img4, img2, img1, img3, img4, 
-  img1, img3, img2, img4, img1, 
-  img3, img2, img4, img1, img3, 
-  img2, img4, img1, img3, img2, 
-  img1, img3, img4, img2
+  img4, img2, img1, img3, img4, 
+  img1, img3, img2, img4, img1, 
+  img3, img2, img4, img1, img3, 
+  img2, img4, img1, img3, img2, 
+  img1, img3, img4, img2
 ];
 
 
 const Branding = () => {
-  
-  // --- SCROLL TO TOP ---
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  
+  // --- SCROLL TO TOP ---
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  return (
-    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col">
-      <Navbar />
+  return (
+    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col">
+      <Navbar />
 
-      <div className="w-full flex flex-col">
-        
-        {/* HERO SECTION - REUTILIZAMOS PAGEHEROE CON NUEVOS PROPS */}
-        <PageHeroe 
-          title={WD_TITLE}
-          description={WD_DESCRIPTION}
-          collageBg={collageBg}
-          color={WD_COLOR} // Usamos el color de Diseño Web
-        />
+      <div className="w-full flex flex-col">
+        
+        {/* HERO SECTION - USANDO RUTAS ABSOLUTAS */}
+        <PageHeroe 
+          title={BRANDING_TITLE}
+          description={BRANDING_DESCRIPTION}
+          
+          // 🛑 RUTAS ABSOLUTAS DESDE LA CARPETA PUBLIC
+          collageBgDesktop="/images/collage-branding-desktop.png" 
+          collageBgMobile="/images/collage-branding-mobile.png"   
+          color={BRANDING_COLOR} 
+        />
 
-        {/* GRID CONTAINER - MANTENEMOS EL MARGEN NEGATIVO PARA SUBIRLO */}
-        <div className="-mt-64 relative z-20"> 
-             <MasonryGrid rawImages={rawImages} />
-        </div>
-        
-      </div>
+        {/* GRID CONTAINER */}
+        <div className="-mt-64 relative z-20"> 
+             <MasonryGrid rawImages={rawImages} />
+        </div>
+        
+      </div>
 
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.08] mix-blend-overlay"
-           style={{ backgroundImage: "url('/noise.png')" }}>
-      </div>
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.08] mix-blend-overlay"
+           style={{ backgroundImage: "url('/noise.png')" }}>
+      </div>
 
-    </div>
-  );
+    </div>
+  );
 };
 export default Branding;
