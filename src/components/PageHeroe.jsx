@@ -1,4 +1,4 @@
-// PageHeroe.jsx (CÓDIGO CORREGIDO)
+// PageHeroe.jsx (CÓDIGO CORREGIDO SOLO PARA MÓVILES)
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -8,9 +8,9 @@ import ResponsiveImage from './ResponsiveImage';
 const STYLES = {
   // Estilos de la descripción 
   description: {
-    // Posición Móvil (Mantenemos 400px, está bien)
-    // 🛑 NUEVA POSICIÓN ESCRITORIO: Lo subimos de 850px a 800px.
-    position: "absolute top-[400px] md:top-[800px] z-30", 
+    // 🛑 CORRECCIÓN MÓVIL: Cambiamos de 400px a 350px para subir el texto.
+    // Posición Escritorio: Mantenemos 800px (que ya está bien).
+    position: "absolute top-[350px] md:top-[800px] z-30", 
     
     // Ancho adaptable
     width: "w-full max-w-[700px] px-8 md:w-[600px] lg:w-[700px] md:px-0", 
@@ -18,7 +18,7 @@ const STYLES = {
 };
 
 
-// Componente principal PageHeroe (El resto del código se mantiene)
+// Componente principal PageHeroe (El resto del código se mantiene igual)
 const PageHeroe = ({ title, description, collageBgMobile, collageBgDesktop, color }) => { 
   
   return (
@@ -49,7 +49,7 @@ const PageHeroe = ({ title, description, collageBgMobile, collageBgDesktop, colo
             </motion.div>
         </div>
 
-     {/* 2. EL BLOQUE DE DESCRIPCIÓN (Usa la nueva posición) */}
+     {/* 2. EL BLOQUE DE DESCRIPCIÓN */}
       <motion.div 
         // ... (transiciones)
         className={`
