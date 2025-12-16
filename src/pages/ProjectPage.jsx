@@ -3,11 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { SLUG_TO_IMAGE_MAP } from '../data/galleryData';
 
-// --- MOCK DATA ---
+// --- MOCK DATA ACTUALIZADO ---
 const generateProjectDetails = () => {
     const data = {};
     const categories = ["PORTRAITS", "BRANDING", "EDITORIAL", "PRODUCTION"];
     const clients = ["AMELIA REED", "O'REN STUDIO", "VOGUE", "SOMA RECORDS"];
+    // Agregamos autores de ejemplo
+    const authors = ["O'REN STUDIO", "CARLO OREN", "ESTUDIO OREN"];
     
     Object.keys(SLUG_TO_IMAGE_MAP).forEach((slug, i) => {
         data[slug] = {
@@ -15,6 +17,7 @@ const generateProjectDetails = () => {
             category: categories[i % categories.length],
             client: clients[i % clients.length],
             date: "FEBRUARY 7, 2025",
+            author: authors[i % authors.length], // Nuevo campo
             mainImage: SLUG_TO_IMAGE_MAP[slug],
         };
     });
@@ -42,27 +45,32 @@ const ProjectPage = () => {
                 
                 {/* ETIQUETA SUPERIOR */}
                 <span className="text-[10px] md:text-xs text-white/50 tracking-[0.3em] font-['Inter'] uppercase mb-8 block">
-                    / GALLERY
+                    / GALERÍA
                 </span>
 
-                {/* TÍTULO PRINCIPAL CON ANTON */}
+                {/* TÍTULO PRINCIPAL */}
                 <h1 className="text-white text-5xl md:text-8xl leading-[1] uppercase mb-20 max-w-5xl tracking-normal font-['Anton']">
                     {project.title}
                 </h1>
 
-                {/* GRILLA DE METADATOS CON INTER */}
+                {/* GRILLA DE METADATOS CORREGIDA */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 border-t border-white/10 pt-10 font-['Inter']">
                     <div>
-                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ CATEGORY</span>
+                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ CATEGORÍA</span>
                         <p className="text-white text-sm md:text-base font-semibold uppercase">{project.category}</p>
                     </div>
                     <div>
-                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ CLIENT</span>
+                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ CLIENTE</span>
                         <p className="text-white text-sm md:text-base font-semibold uppercase">{project.client}</p>
                     </div>
                     <div>
-                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ DATE</span>
+                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ FECHA</span>
                         <p className="text-white text-sm md:text-base font-semibold uppercase">{project.date}</p>
+                    </div>
+                    {/* CUARTO ELEMENTO AHORA DENTRO DE SU DIV */}
+                    <div>
+                        <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ AUTOR</span>
+                        <p className="text-white text-sm md:text-base font-semibold uppercase">{project.author}</p>
                     </div>
                 </div>
 
@@ -80,7 +88,7 @@ const ProjectPage = () => {
                     onClick={() => navigate(-1)}
                     className="text-white/40 hover:text-white transition-colors text-[10px] md:text-xs font-['Inter'] uppercase tracking-[0.2em] mb-20"
                 >
-                    ← BACK TO GALLERY
+                    ← REGRESAR
                 </button>
             </main>
 

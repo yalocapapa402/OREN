@@ -12,7 +12,7 @@ const Projects = () => {
   // Extraemos cada una de su lugar correspondiente en galleryData.js
   const imgGuitarra = SEGMENTED_GALLERY_DATA['Photography'][0];    // p1 (Guitarra)
   const imgCereza = SEGMENTED_GALLERY_DATA['Diseño Grafico'][0];   // g1 (Cereza)
-  const imgStar = SEGMENTED_GALLERY_DATA['Photography'][2];        // p3 (Estrella/Noro)
+  const imgStar = SEGMENTED_GALLERY_DATA['Diseño Grafico'][1];        // g2 (Estrella/Noro)
   const imgPopcorn = SEGMENTED_GALLERY_DATA['WebDesign'][0];       // w1 (Popcorn/Bloomly)
 
   // --- LÓGICA DE NAVEGACIÓN DINÁMICA ---
@@ -161,7 +161,7 @@ const Projects = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/fotografia')} // O la ruta general de portafolio
-            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm px-10 py-4 uppercase tracking-wider hover:bg-white transition-colors"
+            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm px-10 py-4 uppercase tracking-wider hover:bg-white transition-colors flex items-center justify-center w-[248px] h-[60px] rounded-[50px]"
         >
             Ver Más
         </motion.button>

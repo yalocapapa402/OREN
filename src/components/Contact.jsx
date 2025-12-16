@@ -27,7 +27,7 @@ const Contact = () => {
             viewport={{ once: true, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-xs px-8 py-3 uppercase tracking-wider hover:bg-white transition-colors"
+            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-xs px-8 py-3 uppercase tracking-wider hover:bg-white transition-colors flex items-center justify-center w-[248px] h-[60px] rounded-[50px]"
           >
             Contactanos
           </motion.button>
