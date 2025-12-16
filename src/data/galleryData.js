@@ -1,4 +1,3 @@
-// src/data/galleryData.js
 
 // ===============================================
 // IMPORTACIONES: Photography
