@@ -153,10 +153,10 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* --- SECCIÓN FINAL: CONEXIÓN FLUIDA AL PORTAFOLIO (REVELACIÓN CINEMATOGRÁFICA) --- */}
+      {/* --- SECCIÓN FINAL--- */}
       <div className="relative w-full overflow-hidden group/teaser -mt-32 md:-mt-20"> 
         
-        {/* Fondo Parallax: Opacidad y Blur optimizados para móvil (vía clases base) y escritorio (vía md:) */}
+        {/* Fondo Parallax: Opacidad y Blur optimizados para móvily escritorio */}
         <motion.div 
           initial={{ y: 0 }}
           whileInView={{ y: -50 }} 
@@ -174,7 +174,7 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* MÁSCARA DE CONEXIÓN: Degradado para fundir con el fondo negro */}
+        {/*Degradado para fundir con el fondo negro */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0E] via-transparent to-[#0F0E0E] z-10" />
 
         {/* CONTENEDOR DEL BOTÓN CENTRAL */}
