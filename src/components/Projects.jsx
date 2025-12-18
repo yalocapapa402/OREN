@@ -153,50 +153,50 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* --- SECCIÓN FINAL: CONEXIÓN FLUIDA AL PORTAFOLIO --- */}
-<div className="relative w-full overflow-hidden group/teaser -mt-20"> {/* -mt-20 para solapar ligeramente con la fila anterior */}
-  
-  {/* Fondo Parallax: Alineado con la estructura de arriba */}
-  <motion.div 
-    initial={{ y: 0 }}
-    whileInView={{ y: -50 }} 
-    transition={{ duration: 3, ease: "easeOut" }}
-    className="w-full px-6 md:px-[62px] grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 opacity-10 md:opacity-20 blur-2xl group-hover/teaser:blur-xl group-hover/teaser:opacity-30 transition-all duration-1000 pointer-events-none select-none"
-  >
-    {/* Imagen que sigue la columna de NORO (md:col-span-8) */}
-    <div className="md:col-span-8 aspect-[1050/500] overflow-hidden rounded-sm bg-white/5">
-        <img src={SEGMENTED_GALLERY_DATA['Photography'][8]} alt="teaser" className="w-full h-full object-cover" />
-    </div>
+      {/* --- SECCIÓN FINAL: CONEXIÓN FLUIDA AL PORTAFOLIO (REVELACIÓN CINEMATOGRÁFICA) --- */}
+      <div className="relative w-full overflow-hidden group/teaser -mt-32 md:-mt-20"> 
+        
+        {/* Fondo Parallax: Opacidad y Blur optimizados para móvil (vía clases base) y escritorio (vía md:) */}
+        <motion.div 
+          initial={{ y: 0 }}
+          whileInView={{ y: -50 }} 
+          transition={{ duration: 3, ease: "easeOut" }}
+          className="w-full px-6 md:px-[62px] grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 opacity-30 md:opacity-20 blur-xl md:blur-2xl group-hover/teaser:blur-xl group-hover/teaser:opacity-30 transition-all duration-1000 pointer-events-none select-none"
+        >
+          {/* Imagen de fondo izquierda */}
+          <div className="md:col-span-8 aspect-[1050/500] overflow-hidden rounded-sm bg-white/5">
+              <img src={SEGMENTED_GALLERY_DATA['Photography'][8]} alt="teaser" className="w-full h-full object-cover" />
+          </div>
 
-    {/* Imagen que sigue la columna de Bloomly (md:col-span-4) */}
-    <div className="md:col-span-4 aspect-[489/369] overflow-hidden rounded-sm bg-white/5">
-        <img src={SEGMENTED_GALLERY_DATA['Diseño Grafico'][5]} alt="teaser" className="w-full h-full object-cover" />
-    </div>
-  </motion.div>
+          {/* Imagen de fondo derecha */}
+          <div className="md:col-span-4 aspect-[489/369] overflow-hidden rounded-sm bg-white/5">
+              <img src={SEGMENTED_GALLERY_DATA['Diseño Grafico'][5]} alt="teaser" className="w-full h-full object-cover" />
+          </div>
+        </motion.div>
 
-  {/* MÁSCARA DE CONEXIÓN: Degradado que hace que las imágenes "aparezcan" suavemente */}
-  <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0E] via-transparent to-[#0F0E0E] z-10" />
+        {/* MÁSCARA DE CONEXIÓN: Degradado para fundir con el fondo negro */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0E] via-transparent to-[#0F0E0E] z-10" />
 
-  {/* CONTENEDOR DEL BOTÓN */}
-  <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      className="mb-6 text-center"
-    >
-      <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase block">Explora el portafolio completo</span>
-    </motion.div>
+        {/* CONTENEDOR DEL BOTÓN CENTRAL */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="mb-6 text-center"
+          >
+            <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase block">Explora el portafolio completo</span>
+          </motion.div>
 
-    <motion.button 
-        whileHover={{ scale: 1.05, backgroundColor: "#ffffff" }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => navigate('/portafolio')} 
-        className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm uppercase tracking-widest flex items-center justify-center w-[248px] h-[60px] rounded-[50px] transition-all duration-500 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
-    >
-        Ver Más
-    </motion.button>
-  </div>
-</div>
+          <motion.button 
+              whileHover={{ scale: 1.05, backgroundColor: "#ffffff" }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/portafolio')} 
+              className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm uppercase tracking-widest flex items-center justify-center w-[248px] h-[60px] rounded-[50px] transition-all duration-500 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+          >
+              Ver Más
+          </motion.button>
+        </div>
+      </div>
 
     </section>
   );
