@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-// IMPORTAMOS LA DATA CENTRALIZADA
-import { SEGMENTED_GALLERY_DATA } from '../data/galleryData';
+// IMPORTAMOS LA DATA CENTRALIZADA Y EL MAPA DE SLUGS
+import { SEGMENTED_GALLERY_DATA, SLUG_TO_IMAGE_MAP } from '../data/galleryData';
 
 const Projects = () => {
   const navigate = useNavigate();
@@ -14,18 +14,20 @@ const Projects = () => {
   const imgStar = SEGMENTED_GALLERY_DATA['Diseño Grafico'][1];
   const imgPopcorn = SEGMENTED_GALLERY_DATA['WebDesign'][0];
 
-  // --- LÓGICA DE NAVEGACIÓN DINÁMICA ---
+  // --- LÓGICA DE NAVEGACIÓN DINÁMICA (ACTUALIZADA) ---
   const handleProjectClick = (category, indexInCategory) => {
-    let offset = 0;
-    const categories = Object.keys(SEGMENTED_GALLERY_DATA);
+    // 1. Obtenemos la URL de la imagen en la que se hizo clic
+    const targetImageURL = SEGMENTED_GALLERY_DATA[category][indexInCategory];
     
-    for (let cat of categories) {
-      if (cat === category) break;
-      offset += SEGMENTED_GALLERY_DATA[cat].length;
+    // 2. Buscamos el Slug real (ej: "mercedes") asociado a esa imagen en el mapa global
+    const projectSlug = Object.keys(SLUG_TO_IMAGE_MAP).find(
+      (slug) => SLUG_TO_IMAGE_MAP[slug] === targetImageURL
+    );
+
+    // 3. Navegamos a la ruta /project/slug (que es la que configuramos en el main)
+    if (projectSlug) {
+      navigate(`/project/${projectSlug}`);
     }
-    
-    const globalId = offset + indexInCategory;
-    navigate(`/proyectos/imagen-${globalId}`);
   };
 
   return (
@@ -49,10 +51,10 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      {/* --- FILA 1: GUITARRA (Photography) y CEREZA (Diseño Gráfico) --- */}
+      {/* --- FILA 1: Mercedes (Photography) y CEREZA (Diseño Gráfico) --- */}
       <div className="w-full px-6 md:px-[62px] grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mb-24">
         
-        {/* PROYECTO: GUITARRA */}
+        {/* PROYECTO: Mercedes */}
         <div className="md:col-span-4 flex flex-col gap-4">
             <motion.div
                 className="cursor-pointer"
@@ -72,7 +74,7 @@ const Projects = () => {
                     </div>
                 </div>
                 <div className="pt-2">
-                    <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 leading-none tracking-wide">Expogan</h3>
+                    <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 leading-none tracking-wide">Mercedes</h3>
                     <p className="font-inter text-[14px] text-[#E6E1D1] max-w-xs leading-tight opacity-80">Expogan Sonora, la feria ganadera más grande del noroeste del país.</p>
                 </div>
             </motion.div>
@@ -156,7 +158,7 @@ const Projects = () => {
       {/* --- SECCIÓN FINAL--- */}
       <div className="relative w-full overflow-hidden group/teaser -mt-32 md:-mt-20"> 
         
-        {/* Fondo Parallax: Opacidad y Blur optimizados para móvily escritorio */}
+        {/* Fondo Parallax */}
         <motion.div 
           initial={{ y: 0 }}
           whileInView={{ y: -50 }} 
@@ -174,7 +176,7 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/*Degradado para fundir con el fondo negro */}
+        {/* Degradado */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0E] via-transparent to-[#0F0E0E] z-10" />
 
         {/* CONTENEDOR DEL BOTÓN CENTRAL */}

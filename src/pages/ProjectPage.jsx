@@ -1,68 +1,98 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion'; // Para animaciones fluidas
 import Navbar from '../components/Navbar';
-import { SLUG_TO_IMAGE_MAP } from '../data/galleryData';
-
-// --- MOCK DATA ---
-const generateProjectDetails = () => {
-    const data = {};
-    const categories = ["PORTRAITS", "BRANDING", "EDITORIAL", "PRODUCTION"];
-    const clients = ["AMELIA REED", "O'REN STUDIO", "VOGUE", "SOMA RECORDS"];
-    const authors = ["O'REN STUDIO", "CARLO OREN", "ESTUDIO OREN"];
-    
-    Object.keys(SLUG_TO_IMAGE_MAP).forEach((slug, i) => {
-        data[slug] = {
-            title: i === 0 ? "LUMINOUS NIGHTS: A DISCO-INSPIRED PORTRAIT" : `PROJECT TITLE ${i + 1}`,
-            category: categories[i % categories.length],
-            client: clients[i % clients.length],
-            date: "FEBRUARY 7, 2025",
-            author: authors[i % authors.length],
-            mainImage: SLUG_TO_IMAGE_MAP[slug],
-            secondaryImage: SLUG_TO_IMAGE_MAP[slug], 
-            description: "Este proyecto explora la intersección entre la estética editorial y la funcionalidad digital. Desarrollamos una narrativa visual que no solo presenta el contenido, sino que sumerge al usuario en una experiencia de marca cohesiva y minimalista."
-        };
-    });
-    return data;
-};
-
-const PROJECT_DETAILS = generateProjectDetails();
+import { PROJECT_DETAILS } from '../data/galleryData';
 
 const ProjectPage = () => {
     const { projectSlug } = useParams();
     const navigate = useNavigate();
     const project = PROJECT_DETAILS[projectSlug];
     
+    // ESTADO PARA EL LIGHTBOX
+    const [selectedImage, setSelectedImage] = useState(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [projectSlug]);
 
-    if (!project) return <div className="text-white p-20 font-['Inter']">Proyecto no encontrado</div>;
+    if (!project) {
+        return (
+            <div className="bg-[#0F0E0E] min-h-screen flex flex-col items-center justify-center font-['Inter']">
+                <h2 className="text-white text-xl uppercase tracking-widest mb-4">Proyecto no encontrado</h2>
+                <button onClick={() => navigate('/')} className="text-white/50 border border-white/20 px-6 py-2 rounded-full">
+                    VOLVER AL INICIO
+                </button>
+            </div>
+        );
+    }
 
     return (
-        <div className="bg-[#0F0E0E] min-h-screen w-full flex flex-col font-['Inter'] overflow-x-hidden">
+        <div className="bg-[#0F0E0E] min-h-screen w-full flex flex-col font-['Inter'] overflow-x-hidden relative">
             <Navbar />
             
+            {/* ===============================================
+                COMPONENTES DEL LIGHTBOX (OVERLAY)
+            =============================================== */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedImage(null)}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm cursor-zoom-out"
+                    >
+                        {/* Botón Cerrar */}
+                        <motion.button 
+                            className="absolute top-10 right-10 text-white/50 hover:text-white text-sm tracking-widest uppercase z-[110]"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            Cerrar [ESC]
+                        </motion.button>
+
+                        {/* Imagen en Alta Resolución */}
+                        <motion.img 
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            src={selectedImage} 
+                            className="max-w-[90vw] max-h-[85vh] object-contain shadow-2xl"
+                            alt="Enlarged view"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ===============================================
+                CONTENIDO DE LA PÁGINA
+            =============================================== */}
             <main className="pt-32 w-full flex flex-col items-center">
-                {/* CONTENEDOR CON MARGENES PARA CONTENIDO ESTÁNDAR */}
                 <div className="px-6 md:px-[62px] w-full max-w-[1600px]">
                     <span className="text-[10px] md:text-xs text-white/50 tracking-[0.3em] uppercase mb-8 block">/ GALERÍA</span>
                     <h1 className="text-white text-5xl md:text-8xl leading-[1] uppercase mb-20 max-w-5xl font-['Anton']">{project.title}</h1>
 
                     {/* METADATOS */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 border-t border-white/10 pt-10">
-                        {['CATEGORÍA', 'CLIENTE', 'FECHA', 'AUTOR'].map((label, idx) => (
+                        {Object.entries({
+                            CATEGORÍA: project.category,
+                            CLIENTE: project.client,
+                            FECHA: project.date,
+                            AUTOR: project.author
+                        }).map(([label, value]) => (
                             <div key={label}>
                                 <span className="text-[10px] md:text-xs text-white/50 tracking-[0.2em] uppercase block mb-3">/ {label}</span>
-                                <p className="text-white text-sm md:text-base font-semibold uppercase">
-                                    {idx === 0 ? project.category : idx === 1 ? project.client : idx === 2 ? project.date : project.author}
-                                </p>
+                                <p className="text-white text-sm md:text-base font-semibold uppercase">{value}</p>
                             </div>
                         ))}
                     </div>
 
-                    {/* 1. IMAGEN PRINCIPAL */}
-                    <div className="w-full mb-24 overflow-hidden rounded-sm">
-                        <img src={project.mainImage} alt={project.title} className="w-full h-auto object-cover" />
+                    {/* 1. HERO IMAGE */}
+                    <div 
+                        className="w-full mb-24 overflow-hidden rounded-sm cursor-zoom-in group"
+                        onClick={() => setSelectedImage(project.images[0].high)}
+                    >
+                        <img src={project.images[0].low} alt={project.title} className="w-full h-auto object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
                     </div>
 
                     {/* 2. DESCRIPCIÓN + VERTICAL */}
@@ -72,76 +102,69 @@ const ProjectPage = () => {
                             <p className="text-white/80 text-lg md:text-2xl leading-relaxed font-light italic">{project.description}</p>
                         </div>
                         <div className="w-full md:w-1/2">
-                            <div className="aspect-[3/4] md:aspect-[2/3] w-full overflow-hidden rounded-sm bg-white/5">
-                                <img src={project.secondaryImage} alt="Detail" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                            <div 
+                                className="aspect-[3/4] md:aspect-[2/3] w-full overflow-hidden rounded-sm bg-white/5 cursor-zoom-in group"
+                                onClick={() => setSelectedImage(project.images[1].high)}
+                            >
+                                <img src={project.images[1].low} alt="Detail" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
                             </div>
                         </div>
                     </div>
 
-                    {/* 3. IMAGEN ANCHA CENTRAL */}
+                    {/* 3. ANCHA CENTRAL */}
                     <div className="w-full mb-40">
-                        <div className="aspect-[4/3] md:aspect-[16/10] w-full overflow-hidden rounded-sm bg-white/5">
-                            <img src={project.mainImage} alt="Showcase" className="w-full h-full object-cover" />
+                        <div 
+                            className="aspect-[4/3] md:aspect-[16/10] w-full overflow-hidden rounded-sm bg-white/5 cursor-zoom-in group"
+                            onClick={() => setSelectedImage(project.images[2].high)}
+                        >
+                            <img src={project.images[2].low} alt="Showcase" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
                         </div>
                     </div>
 
-                    {/* 4. PRIMER PAR ASIMÉTRICO */}
+                    {/* 4. PAR ASIMÉTRICO 1 */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-32 items-start">
-                        <div className="w-full aspect-[3/4] overflow-hidden rounded-sm bg-white/5">
-                            <img src={project.secondaryImage} alt="Left 1" className="w-full h-full object-cover" />
+                        <div className="w-full aspect-[3/4] overflow-hidden rounded-sm bg-white/5 cursor-zoom-in group" onClick={() => setSelectedImage(project.images[3].high)}>
+                            <img src={project.images[3].low} alt="L1" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
                         </div>
-                        <div className="w-full aspect-[3/4] overflow-hidden rounded-sm bg-white/5 md:mt-32">
-                            <img src={project.secondaryImage} alt="Right 1" className="w-full h-full object-cover" />
+                        <div className="w-full aspect-[3/4] overflow-hidden rounded-sm bg-white/5 md:mt-32 cursor-zoom-in group" onClick={() => setSelectedImage(project.images[4].high)}>
+                            <img src={project.images[4].low} alt="R1" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
                         </div>
                     </div>
 
-                    {/* 5. SEGUNDO PAR ASIMÉTRICO */}
+                    {/* 5. PAR ASIMÉTRICO 2 */}
                     <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-12 md:gap-20 mb-40 items-center">
-                        <div className="w-full md:w-[92%]"> 
+                        <div className="w-full md:w-[92%] cursor-zoom-in group" onClick={() => setSelectedImage(project.images[5].high)}> 
                             <div className="aspect-[16/11] overflow-hidden rounded-sm bg-white/5 shadow-xl">
-                                <img src={project.secondaryImage} alt="Left 2" className="w-full h-full object-cover" />
+                                <img src={project.images[5].low} alt="L2" className="w-full h-full object-cover group-hover:scale-[1.02] transition-all duration-700" />
                             </div>
                         </div>
-                        <div className="w-full aspect-[3/4] md:aspect-[2/3] overflow-hidden rounded-sm bg-white/5">
-                            <img src={project.secondaryImage} alt="Right 2" className="w-full h-full object-cover" />
+                        <div className="w-full aspect-[3/4] md:aspect-[2/3] overflow-hidden rounded-sm bg-white/5 cursor-zoom-in group" onClick={() => setSelectedImage(project.images[6].high)}>
+                            <img src={project.images[6].low} alt="R2" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
                         </div>
                     </div>
                 </div>
 
-                {/* 6. IMAGEN FINAL: FULL WIDTH CORREGIDA */}
-<div className="w-full mb-24 overflow-hidden">
-    {/* Usamos w-[100vw] para asegurar el ancho total 
-        y eliminamos el posicionamiento relativo que causaba el desfase 
-    */}
-    <div className="w-screen h-[70vh] md:h-[90vh]">
-        <img 
-            src={project.mainImage} 
-            alt="Final Cinematic View" 
-            className="w-full h-full object-cover"
-        />
-        {/* Overlay sutil para elegancia */}
-        <div className="absolute inset-0 bg-black/10"></div>
-    </div>
-</div>
-
-                {/* TEXTO DE CIERRE Y BOTÓN REGRESAR */}
-                <div className="px-6 md:px-[62px] w-full max-w-[1600px] mb-20">
-                    <div className="flex flex-col items-center mb-20">
-                        <div className="h-[1px] w-20 bg-white/20 mb-6"></div>
-                        <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase text-center">
-                            CONCLUYENDO / {project.title}
-                        </span>
+                {/* 6. FULL WIDTH FINAL */}
+                <div 
+                    className="w-full mb-24 overflow-hidden cursor-zoom-in group" 
+                    onClick={() => setSelectedImage(project.images[7].high)}
+                >
+                    <div className="w-screen h-[70vh] md:h-[90vh] relative">
+                        <img src={project.images[7].low} alt="Final" className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
+                        <div className="absolute inset-0 bg-black/10"></div>
                     </div>
+                </div>
 
-                    <div className="border-t border-white/10 pt-10 flex justify-between items-center">
-                        <button onClick={() => navigate(-1)} className="text-white/40 hover:text-white transition-colors text-[10px] md:text-xs font-['Inter'] uppercase tracking-[0.2em]">
-                            ← REGRESAR A GALERÍA
-                        </button>
-                        <span className="text-white/10 text-[10px] uppercase tracking-widest">O'REN STUDIO © 2025</span>
-                    </div>
+                {/* FOOTER */}
+                <div className="px-6 md:px-[62px] w-full max-w-[1600px] mb-20 border-t border-white/10 pt-10 flex justify-between items-center">
+                    <button onClick={() => navigate(-1)} className="text-white/40 hover:text-white transition-colors text-xs uppercase tracking-widest">
+                        ← REGRESAR
+                    </button>
+                    <span className="text-white/10 text-[10px] uppercase tracking-widest">O'REN STUDIO © 2025</span>
                 </div>
             </main>
 
+            {/* Efecto de Grano */}
             <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: "url('/noise.png')" }}></div>
         </div>
     );

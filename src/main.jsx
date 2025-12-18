@@ -10,8 +10,6 @@ import Branding from './pages/Produccion multimedia';
 import Digital from './pages/Diseño Grafico';
 import WebDesign from './pages/WebDesign';
 import PortafolioCompleto from './pages/PortafolioCompleto';
-
-// 🛑 IMPORTANTE: Importar la nueva página de detalles de proyecto
 import ProjectPage from './pages/ProjectPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -28,10 +26,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/web" element={<WebDesign />} /> 
         <Route path="/portafolio" element={<PortafolioCompleto />} />
 
-        {/* 🛑 NUEVA RUTA DINÁMICA: 
-            Cualquier clic en el MasonryGrid navegará aquí. 
-            El ":projectSlug" es la variable que recibirá "imagen-0", "imagen-1", etc. */}
-        <Route path="/proyectos/:projectSlug" element={<ProjectPage />} />
+        {/* RUTA DINÁMICA UNIFICADA:
+          Cambiamos "/proyectos/" por "/project/" para que coincida 
+          con la navegación de Projects.js y el mapeo de Mercedes.
+        */}
+        <Route path="/project/:projectSlug" element={<ProjectPage />} />
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
