@@ -9,14 +9,12 @@ const Projects = () => {
   const navigate = useNavigate();
 
   // --- OBTENCIÓN DE IMÁGENES DESDE LAS CATEGORÍAS ---
-  // Extraemos cada una de su lugar correspondiente en galleryData.js
-  const imgGuitarra = SEGMENTED_GALLERY_DATA['Photography'][0];    // p1 (Guitarra)
-  const imgCereza = SEGMENTED_GALLERY_DATA['Diseño Grafico'][0];   // g1 (Cereza)
-  const imgStar = SEGMENTED_GALLERY_DATA['Diseño Grafico'][1];        // g2 (Estrella/Noro)
-  const imgPopcorn = SEGMENTED_GALLERY_DATA['WebDesign'][0];       // w1 (Popcorn/Bloomly)
+  const imgGuitarra = SEGMENTED_GALLERY_DATA['Photography'][0];
+  const imgCereza = SEGMENTED_GALLERY_DATA['Diseño Grafico'][0];
+  const imgStar = SEGMENTED_GALLERY_DATA['Diseño Grafico'][1];
+  const imgPopcorn = SEGMENTED_GALLERY_DATA['WebDesign'][0];
 
   // --- LÓGICA DE NAVEGACIÓN DINÁMICA ---
-  // Esta función calcula el ID (imagen-X) buscando la posición real de la imagen en toda la data
   const handleProjectClick = (category, indexInCategory) => {
     let offset = 0;
     const categories = Object.keys(SEGMENTED_GALLERY_DATA);
@@ -107,14 +105,14 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* --- FILA 2: ESTRELLA (Photography) y POPCORN (Web Design) --- */}
+      {/* --- FILA 2: ESTRELLA (Diseño Gráfico) y POPCORN (Web Design) --- */}
       <div className="w-full px-6 md:px-[62px] grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mb-32">
         
         {/* PROYECTO: ESTRELLA (Noro) */}
         <div className="md:col-span-8 flex flex-col gap-4">
             <motion.div
                 className="cursor-pointer"
-                onClick={() => handleProjectClick('Photography', 2)}
+                onClick={() => handleProjectClick('Diseño Grafico', 1)} 
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -155,17 +153,50 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* --- BOTÓN VER MÁS --- */}
-      <div className="w-full flex justify-center pb-20">
-        <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/fotografia')} // O la ruta general de portafolio
-            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm px-10 py-4 uppercase tracking-wider hover:bg-white transition-colors flex items-center justify-center w-[248px] h-[60px] rounded-[50px]"
-        >
-            Ver Más
-        </motion.button>
-      </div>
+      {/* --- SECCIÓN FINAL: CONEXIÓN FLUIDA AL PORTAFOLIO --- */}
+<div className="relative w-full overflow-hidden group/teaser -mt-20"> {/* -mt-20 para solapar ligeramente con la fila anterior */}
+  
+  {/* Fondo Parallax: Alineado con la estructura de arriba */}
+  <motion.div 
+    initial={{ y: 0 }}
+    whileInView={{ y: -50 }} 
+    transition={{ duration: 3, ease: "easeOut" }}
+    className="w-full px-6 md:px-[62px] grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 opacity-10 md:opacity-20 blur-2xl group-hover/teaser:blur-xl group-hover/teaser:opacity-30 transition-all duration-1000 pointer-events-none select-none"
+  >
+    {/* Imagen que sigue la columna de NORO (md:col-span-8) */}
+    <div className="md:col-span-8 aspect-[1050/500] overflow-hidden rounded-sm bg-white/5">
+        <img src={SEGMENTED_GALLERY_DATA['Photography'][8]} alt="teaser" className="w-full h-full object-cover" />
+    </div>
+
+    {/* Imagen que sigue la columna de Bloomly (md:col-span-4) */}
+    <div className="md:col-span-4 aspect-[489/369] overflow-hidden rounded-sm bg-white/5">
+        <img src={SEGMENTED_GALLERY_DATA['Diseño Grafico'][5]} alt="teaser" className="w-full h-full object-cover" />
+    </div>
+  </motion.div>
+
+  {/* MÁSCARA DE CONEXIÓN: Degradado que hace que las imágenes "aparezcan" suavemente */}
+  <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0E] via-transparent to-[#0F0E0E] z-10" />
+
+  {/* CONTENEDOR DEL BOTÓN */}
+  <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      className="mb-6 text-center"
+    >
+      <span className="text-[10px] text-white/40 tracking-[0.5em] uppercase block">Explora el portafolio completo</span>
+    </motion.div>
+
+    <motion.button 
+        whileHover={{ scale: 1.05, backgroundColor: "#ffffff" }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => navigate('/portafolio')} 
+        className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-sm uppercase tracking-widest flex items-center justify-center w-[248px] h-[60px] rounded-[50px] transition-all duration-500 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+    >
+        Ver Más
+    </motion.button>
+  </div>
+</div>
 
     </section>
   );

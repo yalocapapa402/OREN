@@ -9,6 +9,7 @@ import Photography from './pages/Photography';
 import Branding from './pages/Produccion multimedia';
 import Digital from './pages/Diseño Grafico';
 import WebDesign from './pages/WebDesign';
+import PortafolioCompleto from './pages/PortafolioCompleto';
 
 // 🛑 IMPORTANTE: Importar la nueva página de detalles de proyecto
 import ProjectPage from './pages/ProjectPage';
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Produccion multimedia" element={<Branding />} />
         <Route path="/Diseño Grafico" element={<Digital />} />
         <Route path="/web" element={<WebDesign />} /> 
+        <Route path="/portafolio" element={<PortafolioCompleto />} />
 
         {/* 🛑 NUEVA RUTA DINÁMICA: 
             Cualquier clic en el MasonryGrid navegará aquí. 
