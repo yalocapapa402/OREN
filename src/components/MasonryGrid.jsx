@@ -32,8 +32,12 @@ const PhotoCard = ({ photo, index, rounded, navigateToProject }) => (
 const MasonryGrid = ({ rawImages }) => {
   const navigate = useNavigate();
 
+  // --- LÓGICA DE NAVEGACIÓN CORREGIDA ---
   const navigateToProject = (photo) => {
-    navigate(`/proyectos/${photo.slug}`);
+    // Cambiamos "/proyectos/" por "/project/" para que coincida con main.jsx
+    if (photo.slug) {
+      navigate(`/project/${photo.slug}`);
+    }
   };
 
   // Definimos 4 tamaños para que el patrón sea más dinámico en 4 columnas
@@ -41,15 +45,14 @@ const MasonryGrid = ({ rawImages }) => {
     "aspect-[310.71/320.36]", // Pequeño
     "aspect-[310.71/403.34]", // Mediano
     "aspect-[310.71/488.25]", // Grande
-    "aspect-[310.71/360.00]"  // Extra (para variar el patrón)
+    "aspect-[310.71/360.00]"  // Extra
   ];
 
   // --- LÓGICA DE DISTRIBUCIÓN PARA ESCRITORIO (4 COLUMNAS) ---
-  const numColumns = 4; // 🛑 Cambiado a 4
+  const numColumns = 4;
   const desktopColumns = Array.from({ length: numColumns }, () => []);
 
   rawImages.forEach((photo, index) => {
-    // Asignamos el tamaño basado en el índice global para que el patrón sea horizontal
     const aspectClass = sizes[index % sizes.length]; 
     
     const photoObj = {
@@ -58,11 +61,10 @@ const MasonryGrid = ({ rawImages }) => {
       aspectClass: aspectClass
     };
 
-    // Distribución cíclica: 0->col0, 1->col1, 2->col2, 3->col3, 4->col0...
     desktopColumns[index % numColumns].push(photoObj);
   });
 
-  // --- LÓGICA PARA MÓVIL (Mantenemos 3 columnas pequeñas) ---
+  // --- LÓGICA PARA MÓVIL (3 columnas) ---
   const generateFixedColumn = (sizeIndex, colId) => {
     return Array.from({ length: 6 }).map((_, i) => {
       const imgIndex = (i + colId) % rawImages.length;
@@ -80,39 +82,42 @@ const MasonryGrid = ({ rawImages }) => {
   const mobileCol3 = generateFixedColumn(2, 2);
 
   return (
-    <>
-      <div className="px-6 md:px-[62px] pb-40 relative z-20 bg-[#0F0E0E] pt-16">
-        
-        {/* MÓVIL: 3 columnas (se ve mejor en pantallas pequeñas) */}
-        <div className="flex md:hidden flex-row gap-4 justify-center">
-          {[mobileCol1, mobileCol2, mobileCol3].map((column, colIdx) => (
-            <div key={`mob-col-${colIdx}`} className="flex flex-col gap-4 w-1/3">
-              {column.map((photo, i) => (
-                <PhotoCard key={photo.id} photo={photo} index={i} rounded="rounded-md" navigateToProject={navigateToProject} />
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {/* ESCRITORIO: 4 COLUMNAS REALES */}
-        <div className="hidden md:flex flex-row gap-4">
-          {desktopColumns.map((column, colIdx) => (
-            <div key={`desk-col-${colIdx}`} className="flex flex-col w-1/4 gap-4"> 
-              {/* 🛑 w-1/4 para que sean 4 columnas iguales */}
-              {column.map((photo, i) => (
-                <PhotoCard 
-                  key={photo.id} 
-                  photo={photo} 
-                  index={i} 
-                  rounded="rounded-xl" 
-                  navigateToProject={navigateToProject} 
-                />
-              ))}
-            </div>
-          ))}
-        </div>
+    <div className="px-6 md:px-[62px] pb-40 relative z-20 bg-[#0F0E0E] pt-16">
+      
+      {/* MÓVIL: 3 columnas */}
+      <div className="flex md:hidden flex-row gap-4 justify-center">
+        {[mobileCol1, mobileCol2, mobileCol3].map((column, colIdx) => (
+          <div key={`mob-col-${colIdx}`} className="flex flex-col gap-4 w-1/3">
+            {column.map((photo, i) => (
+              <PhotoCard 
+                key={photo.id} 
+                photo={photo} 
+                index={i} 
+                rounded="rounded-md" 
+                navigateToProject={navigateToProject} 
+              />
+            ))}
+          </div>
+        ))}
       </div>
-    </>
+
+      {/* ESCRITORIO: 4 COLUMNAS */}
+      <div className="hidden md:flex flex-row gap-4">
+        {desktopColumns.map((column, colIdx) => (
+          <div key={`desk-col-${colIdx}`} className="flex flex-col w-1/4 gap-4"> 
+            {column.map((photo, i) => (
+              <PhotoCard 
+                key={photo.id} 
+                photo={photo} 
+                index={i} 
+                rounded="rounded-xl" 
+                navigateToProject={navigateToProject} 
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

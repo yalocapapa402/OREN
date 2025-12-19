@@ -5,38 +5,38 @@ import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid'; 
 import PageHeroe from '../components/PageHeroe'; 
 
-// 🛑 IMPORTACIÓN DE DATA CENTRAL
-import { SEGMENTED_GALLERY_DATA } from '../data/galleryData';
+// 🛑 IMPORTACIÓN DE DATA CENTRAL Y MAPA DE SLUGS
+import { SEGMENTED_GALLERY_DATA, SLUG_TO_IMAGE_MAP } from '../data/galleryData';
 
-// --- DATA ESPECÍFICA DE DISEÑO GRÁFICO (DigitalDesign) ---
+// --- DATA ESPECÍFICA DE DISEÑO GRÁFICO ---
 const DD_COLOR = '#00FFC0'; 
 const DD_TITLE = 'DISEÑO GRÁFICO'; 
-const DD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
-
-// 🛑 LÓGICA DE MAPEO PARA NAVEGACIÓN
-// 1. Obtenemos las URLs de la sección correspondiente
-const designImagesURLs = SEGMENTED_GALLERY_DATA['Diseño Grafico']; 
-
-// 2. Calculamos el offset (Photography tiene 15 imágenes) para que los slugs coincidan con el mapeo global
-// Photography (15) + Producción Multimedia (1) = 16. Diseño Gráfico empieza en el slug 'imagen-16'
-const photographyOffset = SEGMENTED_GALLERY_DATA['Photography'].length;
-const multimediaOffset = SEGMENTED_GALLERY_DATA['Produccion multimedia'].length;
-const globalOffset = photographyOffset + multimediaOffset;
-
-// 3. Formateamos para el MasonryGrid { src, slug }
-const formattedImages = designImagesURLs.map((url, index) => ({
-    src: url,
-    slug: `imagen-${index + globalOffset}`
-}));
+const DD_DESCRIPTION = 'Transformamos conceptos abstractos en narrativas visuales potentes que definen la identidad de marca.';
 
 const DigitalDesign = () => {
   
+  // 🛑 LÓGICA DE MAPEO DINÁMICA
+  // 1. Obtenemos las URLs de Diseño Gráfico
+  const designImagesURLs = SEGMENTED_GALLERY_DATA['Diseño Grafico']; 
+
+  // 2. Mapeamos buscando el SLUG REAL (ej: "gata-rompe-hogares" o "noro")
+  const formattedImages = designImagesURLs.map((url) => {
+    const realSlug = Object.keys(SLUG_TO_IMAGE_MAP).find(
+      (slug) => SLUG_TO_IMAGE_MAP[slug] === url
+    );
+
+    return {
+      src: url,
+      slug: realSlug || "imagen-pendiente" // Asigna el slug real del diccionario
+    };
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col">
+    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col font-['Inter']">
       <Navbar />
 
       <div className="w-full flex flex-col">
@@ -52,13 +52,13 @@ const DigitalDesign = () => {
 
         {/* GRID CONTAINER */}
         <div className="-mt-64 relative z-20"> 
-             {/* 🛑 PASAMOS LAS IMÁGENES FORMATEADAS DESDE GALLERYDATA */}
              <MasonryGrid rawImages={formattedImages} />
         </div>
         
       </div>
 
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.08] mix-blend-overlay"
+      {/* Efecto de Grano */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
            style={{ backgroundImage: "url('/noise.png')" }}>
       </div>
 

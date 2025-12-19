@@ -5,64 +5,61 @@ import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid'; 
 import PageHeroe from '../components/PageHeroe'; 
 
-// 🛑 IMPORTAR LA DATA CENTRAL
-import { SEGMENTED_GALLERY_DATA } from '../data/galleryData';
+// 🛑 IMPORTAMOS TAMBIÉN EL MAPA DE SLUGS
+import { SEGMENTED_GALLERY_DATA, SLUG_TO_IMAGE_MAP } from '../data/galleryData';
 
-
-// --- DATA ESPECÍFICA DE FOTOGRAFÍA (Se mantiene) ---
 const WD_COLOR = '#B00601'; 
 const WD_TITLE = 'FOTOGRAFIA';
-const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
-
-
-// 🛑 NUEVO CÓDIGO: OBTENER Y MAPEAR LA DATA
-
-// 1. Obtenemos la lista de URLs (solo la foto-1.jpeg)
-const photographyImagesURLs = SEGMENTED_GALLERY_DATA['Photography']; 
-
-// 2. Mapeamos los URLs a objetos { src, slug } que MasonryGrid necesita para navegar
-const rawImages = photographyImagesURLs.map((url, index) => {
-    return {
-        src: url,
-        // El slug debe coincidir con la lógica del ProjectPage
-        slug: `imagen-${index}` 
-    };
-});
+const WD_DESCRIPTION = 'Capturamos la esencia de cada momento a través de una lente editorial y cinematográfica.';
 
 const Photography = () => {
-  
-  // --- SCROLL TO TOP ---
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  
+  // 🛑 LÓGICA CORREGIDA DENTRO DEL COMPONENTE
+  // Obtenemos la lista de URLs de la categoría Photography
+  const photographyImagesURLs = SEGMENTED_GALLERY_DATA['Photography']; 
 
-  return (
-    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col">
-      <Navbar />
+  // Mapeamos buscando el SLUG REAL en el diccionario global
+  const rawImages = photographyImagesURLs.map((url) => {
+    // Buscamos qué slug (ej: "mercedes") tiene asignada esta URL exacta
+    const realSlug = Object.keys(SLUG_TO_IMAGE_MAP).find(
+      (slug) => SLUG_TO_IMAGE_MAP[slug] === url
+    );
 
-      <div className="w-full flex flex-col">
-        
-        {/* HERO SECTION */}
-        <PageHeroe 
-          title={WD_TITLE}
-          description={WD_DESCRIPTION}
-          collageBgDesktop="/images/collage-fotografia-desktop.png" 
-          collageBgMobile="/images/collage-fotografia-mobile.png"   
-          color={WD_COLOR} 
-        />
+    return {
+      src: url,
+      slug: realSlug || "imagen-desconocida" // Usa el slug real o uno por defecto
+    };
+  });
 
-        {/* GRID CONTAINER */}
-        <div className="-mt-64 relative z-20"> 
-             <MasonryGrid rawImages={rawImages} />
-        </div>
-        
-      </div>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.08] mix-blend-overlay"
-           style={{ backgroundImage: "url('/noise.png')" }}>
-      </div>
+  return (
+    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col font-['Inter']">
+      <Navbar />
 
-    </div>
-  );
+      <div className="w-full flex flex-col">
+        <PageHeroe 
+          title={WD_TITLE}
+          description={WD_DESCRIPTION}
+          collageBgDesktop="/images/collage-fotografia-desktop.png" 
+          collageBgMobile="/images/collage-fotografia-mobile.png"   
+          color={WD_COLOR} 
+        />
+
+        {/* GRID CONTAINER */}
+        <div className="-mt-64 relative z-20"> 
+             <MasonryGrid rawImages={rawImages} />
+        </div>
+      </div>
+
+      {/* Efecto de Grano */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
+           style={{ backgroundImage: "url('/noise.png')" }}>
+      </div>
+    </div>
+  );
 };
+
 export default Photography;

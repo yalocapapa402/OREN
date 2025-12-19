@@ -1,42 +1,43 @@
+// src/pages/WebDesign.jsx
+
 import React, { useEffect } from 'react'; 
 import Navbar from '../components/Navbar';
 import MasonryGrid from '../components/MasonryGrid'; 
 import PageHeroe from '../components/PageHeroe'; 
 
-// 🛑 IMPORTACIÓN DE DATA CENTRAL
-import { SEGMENTED_GALLERY_DATA } from '../data/galleryData';
+// 🛑 IMPORTACIÓN DE DATA CENTRAL Y MAPA DE SLUGS
+import { SEGMENTED_GALLERY_DATA, SLUG_TO_IMAGE_MAP } from '../data/galleryData';
 
 // --- DATA ESPECÍFICA DE DISEÑO WEB ---
 const WD_COLOR = '#00FFC0'; 
 const WD_TITLE = 'DISEÑO WEB';
 const WD_DESCRIPTION = 'Diseñamos experiencias digitales fluidas y atractivas que convierten a visitantes en clientes leales.';
 
-// 🛑 LÓGICA DE MAPEO PARA NAVEGACIÓN GLOBAL
-// 1. Obtenemos las URLs de la sección WebDesign
-const webImagesURLs = SEGMENTED_GALLERY_DATA['WebDesign'] || []; 
-
-// 2. Calculamos el offset global:
-// Sumamos las imágenes de todas las categorías anteriores para obtener el índice correcto
-const photographyCount = SEGMENTED_GALLERY_DATA['Photography']?.length || 0;
-const multimediaCount = SEGMENTED_GALLERY_DATA['Produccion multimedia']?.length || 0;
-const designCount = SEGMENTED_GALLERY_DATA['Diseño Grafico']?.length || 0;
-
-const globalOffset = photographyCount + multimediaCount + designCount;
-
-// 3. Formateamos para el MasonryGrid { src, slug }
-const formattedImages = webImagesURLs.map((url, index) => ({
-    src: url,
-    slug: `imagen-${index + globalOffset}`
-}));
-
 const WebDesign = () => {
   
+  // 🛑 LÓGICA DE MAPEO DINÁMICA (Sincronizada con Bloomly)
+  // 1. Obtenemos las URLs de la sección WebDesign
+  const webImagesURLs = SEGMENTED_GALLERY_DATA['WebDesign'] || []; 
+
+  // 2. Mapeamos buscando el SLUG REAL en el diccionario global
+  const formattedImages = webImagesURLs.map((url) => {
+    // Buscamos el slug (ej: "bloomly") asociado a esta URL
+    const realSlug = Object.keys(SLUG_TO_IMAGE_MAP).find(
+      (slug) => SLUG_TO_IMAGE_MAP[slug] === url
+    );
+
+    return {
+      src: url,
+      slug: realSlug || "imagen-web-pendiente"
+    };
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col">
+    <div className="bg-[#0F0E0E] min-h-screen w-full relative overflow-x-hidden flex flex-col font-['Inter']">
       <Navbar />
 
       <div className="w-full flex flex-col">
@@ -52,13 +53,13 @@ const WebDesign = () => {
 
         {/* GRID CONTAINER */}
         <div className="-mt-64 relative z-20"> 
-             {/* 🛑 PASAMOS LAS IMÁGENES SINCRONIZADAS */}
              <MasonryGrid rawImages={formattedImages} />
         </div>
         
       </div>
 
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.08] mix-blend-overlay"
+      {/* Efecto de Grano */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay"
            style={{ backgroundImage: "url('/noise.png')" }}>
       </div>
 

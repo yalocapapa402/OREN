@@ -16,15 +16,12 @@ const Projects = () => {
 
   // --- LÓGICA DE NAVEGACIÓN DINÁMICA (ACTUALIZADA) ---
   const handleProjectClick = (category, indexInCategory) => {
-    // 1. Obtenemos la URL de la imagen en la que se hizo clic
     const targetImageURL = SEGMENTED_GALLERY_DATA[category][indexInCategory];
     
-    // 2. Buscamos el Slug real (ej: "mercedes") asociado a esa imagen en el mapa global
     const projectSlug = Object.keys(SLUG_TO_IMAGE_MAP).find(
       (slug) => SLUG_TO_IMAGE_MAP[slug] === targetImageURL
     );
 
-    // 3. Navegamos a la ruta /project/slug (que es la que configuramos en el main)
     if (projectSlug) {
       navigate(`/project/${projectSlug}`);
     }
@@ -69,7 +66,7 @@ const Projects = () => {
                         <img 
                             src={imgGuitarra} 
                             alt="Expogan" 
-                            className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-700 ease-in-out transform group-hover:scale-105"
+                            className="w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105"
                         />
                     </div>
                 </div>
@@ -95,7 +92,7 @@ const Projects = () => {
                         <img 
                             src={imgCereza} 
                             alt="Gata Rompe Hogares" 
-                            className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-700 ease-in-out transform group-hover:scale-105"
+                            className="w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105"
                         />
                     </div>
                 </div>
@@ -122,7 +119,7 @@ const Projects = () => {
             >
                 <div className="w-full relative group">
                     <div className="aspect-[1052/813] w-full overflow-hidden">
-                        <img src={imgStar} alt="Noro" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-700 ease-in-out transform group-hover:scale-105" />
+                        <img src={imgStar} alt="Noro" className="w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105" />
                     </div>
                 </div>
                 <div className="pt-2">
@@ -144,7 +141,7 @@ const Projects = () => {
             >
                 <div className="w-full relative group">
                     <div className="aspect-[466/365] w-full overflow-hidden">
-                        <img src={imgPopcorn} alt="Bloomly" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-700 ease-in-out transform group-hover:scale-105" />
+                        <img src={imgPopcorn} alt="Bloomly" className="w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105" />
                     </div>
                 </div>
                 <div className="pt-2">
