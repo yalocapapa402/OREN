@@ -56,15 +56,15 @@ import bloomly3_low from '../assets/WebDesign/bloomly/proyecto-bloomly-foto4-low
 // ===============================================
 // 4. IMPORTACIONES: PROYECTO NORO (4 FOTOS)
 // ===============================================
-import noro0_high from '../assets/DisenoGrafico/noro/proyecto-Noro.png';
-import noro1_high from '../assets/DisenoGrafico/noro/proyecto-Noro-foto2.png';
-import noro2_high from '../assets/DisenoGrafico/noro/proyecto-Noro-foto3.jpg';
-import noro3_high from '../assets/DisenoGrafico/noro/proyecto-Noro-foto4.jpg';
+import noro0_high from '../assets/DisenoGrafico/noro/proyecto-noro.png';
+import noro1_high from '../assets/DisenoGrafico/noro/proyecto-noro-foto2.png';
+import noro2_high from '../assets/DisenoGrafico/noro/proyecto-noro-foto3.jpg';
+import noro3_high from '../assets/DisenoGrafico/noro/proyecto-noro-foto4.jpg';
 
-import noro0_low from '../assets/DisenoGrafico/noro/proyecto-Noro-low.png';
-import noro1_low from '../assets/DisenoGrafico/noro/proyecto-Noro-foto2-low.png';
-import noro2_low from '../assets/DisenoGrafico/noro/proyecto-Noro-foto3-low.jpg';
-import noro3_low from '../assets/DisenoGrafico/noro/proyecto-Noro-foto4-low.jpg';
+import noro0_low from '../assets/DisenoGrafico/noro/proyecto-noro-low.png';
+import noro1_low from '../assets/DisenoGrafico/noro/proyecto-noro-foto2-low.png';
+import noro2_low from '../assets/DisenoGrafico/noro/proyecto-noro-foto3-low.jpg';
+import noro3_low from '../assets/DisenoGrafico/noro/proyecto-noro-foto4-low.jpg';
 
 
 // ===============================================
