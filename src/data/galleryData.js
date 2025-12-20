@@ -117,7 +117,7 @@ export const PROJECT_DETAILS = {
         client: "MERCEDES",
         date: "DICIEMBRE 2025",
         author: "Ray’s Lens",
-        description: "Una narrativa visual que captura la elegancia atemporal en un entorno decadente. 'Mercedes' explora el contraste entre la textura del tejido satinado y la piedra fría de una arquitectura clásica.",
+        description: "Mercedes es una sesión que habita entre lo etéreo y lo teatral.La luz baja y contrastada envuelve el espacio, creando una atmósfera íntima y cinematográfica. Las escaleras y el entorno arquitectónico refuerzan la sensación de tránsito: entre épocas, entre estados, entre lo visible y lo imaginado. Esta escena se construye desde una estética vintage con tintes oníricos, donde el vestido turquesa Mercedes es una sesión de estética vintage y atmósfera onírica, donde la elegancia y el misterio se encuentran.",
         images: [
             { low: m0_low, high: m0_high }, 
             { low: m1_low, high: m1_high }, 
@@ -163,10 +163,10 @@ export const PROJECT_DETAILS = {
     "noro": {
         title: "NORO",
         category: "DISEÑO GRÁFICO",
-        client: "NORO SKATEBOARDING",
-        date: "MAYO 2025",
-        author: "DISEÑO: O'REN STUDIO / FOTO: RAY'S LENS",
-        description: "Plataforma digital diseñada para capturar la energía del skateboarding femenino. La interfaz utiliza una estética urbana con tipografía bold y transiciones dinámicas que reflejan el movimiento y la cultura del Parque Madero.",
+        client: "Morras Patinando",
+        date: "MARZO 2025",
+        author: "DISEÑO: O'REN STUDIO / FOTO: lapir0",
+        description: "En conmemoración por el Día Internacional de la Mujer, Hermosillo tendrá una juntada exclusiva de mujeres que practican skate el próximo sábado 1 de marzo en las inmediaciones del Parque Madero, donde serán varias colectivas las que se reunirán para compartir su gusto por esta actividad que cada vez es más practicada por mujeres.",
         images: [
             { low: noro0_low, high: noro0_high }, 
             { low: noro1_low, high: noro1_high }, 

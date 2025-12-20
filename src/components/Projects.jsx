@@ -72,7 +72,7 @@ const Projects = () => {
                 </div>
                 <div className="pt-2">
                     <h3 className="font-anton text-3xl uppercase text-[#F5F5F0] mb-1 leading-none tracking-wide">Mercedes</h3>
-                    <p className="font-inter text-[14px] text-[#E6E1D1] max-w-xs leading-tight opacity-80">Expogan Sonora, la feria ganadera más grande del noroeste del país.</p>
+                    <p className="font-inter text-[14px] text-[#E6E1D1] max-w-xs leading-tight opacity-80">Una narrativa visual que captura la elegancia atemporal en un entorno decadente. 'Mercedes' explora el contraste entre la textura del tejido satinado y la piedra fría de una arquitectura clásica..</p>
                 </div>
             </motion.div>
         </div>
