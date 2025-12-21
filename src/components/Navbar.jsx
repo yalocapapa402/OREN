@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Importamos Link para navegación SPA
 import { motion, AnimatePresence } from 'framer-motion';
 import logoHeader from '../assets/logo-header.png'; 
 
@@ -31,14 +31,14 @@ const Navbar = () => {
           />
         </Link>
 
-        {/* 2. CENTRO: MENÚ (Escritorio) */}
+        {/* 2. CENTRO: MENÚ (Escritorio) - RUTAS ACTUALIZADAS */}
         <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 font-anton uppercase tracking-wider text-[#F5F5F0]">
-          <a href="/#proyectos" className="transition-opacity hover:opacity-70">Proyectos</a>
-          <a href="/#nosotros" className="transition-opacity hover:opacity-70">Sobre Nosotros</a>
-          <a href="/#contacto" className="transition-opacity hover:opacity-70">Contáctanos</a>
+          <Link to="/portafolio" className="transition-opacity hover:opacity-70">Proyectos</Link>
+          <Link to="/sobre-nosotros" className="transition-opacity hover:opacity-70">Sobre Nosotros</Link>
+          <Link to="/contacto" className="transition-opacity hover:opacity-70">Contáctanos</Link>
         </div>
 
-        {/* 3. DERECHA: COPYRIGHT (Escritorio) / HAMBURGUESA (Móvil) */}
+        {/* 3. DERECHA: COPYRIGHT (Escritorio) */}
         <div className="font-anton text-[#F5F5F0] uppercase hidden md:block">
           ©2025
         </div>
@@ -63,7 +63,7 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* MENÚ MÓVIL PANTALLA COMPLETA */}
+      {/* MENÚ MÓVIL PANTALLA COMPLETA - RUTAS ACTUALIZADAS */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -74,9 +74,9 @@ const Navbar = () => {
             className="fixed inset-0 bg-[#0F0E0E] z-[55] flex flex-col justify-center items-center md:hidden"
           >
             <div className="flex flex-col gap-8 font-anton text-[3rem] text-center uppercase tracking-tighter text-[#F5F5F0]">
-              <a href="/#proyectos" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Proyectos</a>
-              <a href="/#nosotros" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Nosotros</a>
-              <a href="/#contacto" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Contacto</a>
+              <Link to="/portafolio" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Proyectos</Link>
+              <Link to="/sobre-nosotros" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Nosotros</Link>
+              <Link to="/contacto" onClick={toggleMenu} className="hover:text-[#E6E1D1] transition-colors">Contacto</Link>
             </div>
             
             <div className="absolute bottom-10 font-anton text-[#F5F5F0] opacity-30">

@@ -11,6 +11,8 @@ import Digital from './pages/Diseño Grafico';
 import WebDesign from './pages/WebDesign';
 import PortafolioCompleto from './pages/PortafolioCompleto';
 import ProjectPage from './pages/ProjectPage';
+import Contact from './pages/Contact';
+import About from './pages/About';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -25,6 +27,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Diseño Grafico" element={<Digital />} />
         <Route path="/web" element={<WebDesign />} /> 
         <Route path="/portafolio" element={<PortafolioCompleto />} />
+        <Route path="/contacto" element={<Contact />} />
+        <Route path="/sobre-nosotros" element={<About />} />
 
         {/* RUTA DINÁMICA UNIFICADA:
           Cambiamos "/proyectos/" por "/project/" para que coincida 

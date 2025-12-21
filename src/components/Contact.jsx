@@ -1,14 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // 1. Importamos el hook
 
 const Contact = () => {
+  const navigate = useNavigate(); // 2. Inicializamos la navegación
+
   // Detectamos si es móvil para simplificar animaciones de alto consumo
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <section className="relative w-full z-20 pb-20 px-6 md:px-[62px] pt-32 bg-[#0F0E0E] overflow-hidden">
       
-      {/* TEXTO DE FONDO: Animado en PC, Estático en Móvil para rendimiento óptimo */}
+      {/* TEXTO DE FONDO */}
       <motion.div 
         initial={isMobile ? { x: 0, opacity: 0.02 } : { x: "10%", opacity: 0.02 }}
         animate={!isMobile ? { x: "-10%" } : {}}
@@ -23,10 +26,10 @@ const Contact = () => {
         
         <div className="md:col-span-7 flex flex-col items-start">
           <motion.div
-            initial={{ opacity: 0, y: isMobile ? 10 : 30 }} // Salto más corto en móvil
+            initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: isMobile ? 0.4 : 0.8 }} // Animación más rápida en móvil
+            transition={{ duration: isMobile ? 0.4 : 0.8 }}
           >
             <span className="text-[#E6E1D1] font-inter text-[10px] tracking-[0.5em] uppercase mb-4 block opacity-50">
               Sobre el estudio
@@ -37,10 +40,12 @@ const Contact = () => {
             </h2>
           </motion.div>
 
+          {/* 3. BOTÓN ACTUALIZADO CON NAVEGACIÓN */}
           <motion.button 
+            onClick={() => navigate('/contacto')} // Redirección aquí
             whileHover={!isMobile ? { scale: 1.05, letterSpacing: "0.3em" } : {}}
             whileTap={{ scale: 0.95 }}
-            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-[10px] md:text-xs px-10 py-4 uppercase tracking-[0.2em] transition-all duration-500 w-[248px] h-[60px] rounded-[50px] shadow-2xl hover:bg-white will-change-transform"
+            className="bg-[#E6E1D1] text-[#0F0E0E] font-inter font-bold text-[10px] md:text-xs px-10 py-4 uppercase tracking-[0.2em] transition-all duration-500 w-[248px] h-[60px] rounded-[50px] shadow-2xl hover:bg-white cursor-pointer will-change-transform"
           >
             Contáctanos
           </motion.button>
@@ -62,8 +67,7 @@ const Contact = () => {
 
       {/* --- BLOQUE 2: EL "BIG CALL TO ACTION" --- */}
       <div className="flex flex-col items-center justify-center text-center py-10 md:py-32 relative">
-        
-        <div className="relative group">
+        <div className="relative group cursor-pointer" onClick={() => navigate('/contacto')}>
           <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -75,7 +79,6 @@ const Contact = () => {
             <span className={`transition-colors duration-700 ${!isMobile ? 'text-transparent hover:text-[#E6E1D1]' : 'text-transparent'}`} style={{ WebkitTextStroke: isMobile ? '1px #E6E1D1' : '1.5px #E6E1D1' }}>TU IDEA</span>
           </motion.h2>
           
-          {/* OPTIMIZACIÓN DE BLUR: Menos radio en móvil para no saturar la GPU */}
           <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E6E1D1] opacity-[0.05] pointer-events-none ${isMobile ? 'w-[200px] h-[200px] blur-[50px]' : 'w-[400px] h-[400px] blur-[150px]'}`} />
         </div>
 

@@ -47,8 +47,8 @@ const PortafolioCompleto = () => {
                 <PageHeroe 
                     title="PORTAFOLIO"
                     description="Explora nuestra visión creativa a través de una selección mezclada de fotografía, diseño y multimedia."
-                    collageBgDesktop="/images/collage-branding-desktop.png" 
-                    collageBgMobile="/images/collage-branding-mobile.png"   
+                    collageBgDesktop="/images/collage-portafolio-desktop.png" 
+                    collageBgMobile="/images/collage-portafolio-mobile.png"   
                     color="#E6E1D1" 
                 />
 
